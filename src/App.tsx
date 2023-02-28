@@ -34,29 +34,29 @@ function App() {
   const [balance, setBalance] = React.useState(beginningBalance);
   const [statement, setStatement] = React.useState(beginningStatement);
 
-  const goBack = () => handleNav(menuButtons.mainMenu);
-  const handleNav = (buttonClick:string) => {
-    console.log(`handle nav: ${buttonClick}`);
+  // const goBack = () => handleNav(menuButtons.mainMenu);
+  // const handleNav = (buttonClick:string) => {
+  //   console.log(`handle nav: ${buttonClick}`);
 
-    switch (buttonClick) {
-      case menuButtons.statement:
-      case menuButtons.mainMenu:
-      case menuButtons.deposit:
-      case menuButtons.withdrawal:
-      case menuButtons.transfer:
-      case "Satement":
-        console.log(`setting current to ${buttonClick}`);
-        return setCurrentScreen(buttonClick);
+  //   switch (buttonClick) {
+  //     case menuButtons.statement:
+  //     case menuButtons.mainMenu:
+  //     case menuButtons.deposit:
+  //     case menuButtons.withdrawal:
+  //     case menuButtons.transfer:
+  //     case "Satement":
+  //       console.log(`setting current to ${buttonClick}`);
+  //       return setCurrentScreen(buttonClick);
 
-      case menuButtons.quickCash80:
-        console.log(`handle quick cash: ${buttonClick}`);
-        return handleTransfer('80', true);
+  //     case menuButtons.quickCash80:
+  //       console.log(`handle quick cash: ${buttonClick}`);
+  //       return handleTransfer('80', true);
 
-      default:
-        console.warn("button not mapped");
-        break;
-    }
-  };
+  //     default:
+  //       console.warn("button not mapped");
+  //       break;
+  //   }
+  // };
 
   const handleTransfer = (val:string, isWithdrawal = true) => {
     console.log(`Is Withdrawal: ${isWithdrawal}, ${val}`);
@@ -74,7 +74,7 @@ function App() {
       return;
     }
 
-    handleNav(menuButtons.mainMenu);
+    // handleNav(menuButtons.mainMenu);
     if (transfer === 0) return; // no need to record +/- $0.00
 
     // update balance
@@ -100,10 +100,10 @@ function App() {
 
   return (
     <>
-      <div className="App">
-        <header className="App-header">
+      {/* <div className="App">
+        <header className="App-header"> */}
           <img src={logo} className="App-logo" alt="logo" />
-          <h1>Welcome to React Bank</h1>
+          <h1 className="text-primary">Welcome to React Bank</h1>
           <h3>Current Balance: {currency.format(balance)}</h3>
           {/* {
             // swap out components per navigation
@@ -145,8 +145,8 @@ function App() {
               default: <MainMenu onNav={handleNav} balance={balance} />,
             }[currentScreen]
           } */}
-        </header>
-      </div>
+        {/* </header>
+      </div> */}
     </>
   );
 }

@@ -1,11 +1,11 @@
 import React from "react";
 
 export function TransferFunds({onSubmit, isWithdrawal, balance, onGoBack, customValidation = null}) {
-  const [value, setValue] = React.useState('');
-  const [isOverdraft, setIsOverdraft] = React.useState();
-  const [isNegativeInput, setIsNegativeInput] = React.useState();
-  const [isValid, setIsValid] = React.useState();
-  const [isCustomFailure, setIsCustomFailure] = React.useState();
+  const [value, setValue] = React.useState<number>();
+  const [isOverdraft, setIsOverdraft] = React.useState<boolean>();
+  const [isNegativeInput, setIsNegativeInput] = React.useState<boolean>();
+  const [isValid, setIsValid] = React.useState<boolean>();
+  const [isCustomFailure, setIsCustomFailure] = React.useState<boolean>();
   const [customValidationMessage, setCustomValidationMessage] = React.useState();
 
   React.useEffect(() => {
@@ -64,14 +64,14 @@ export function TransferFunds({onSubmit, isWithdrawal, balance, onGoBack, custom
       {isCustomFailure ? <div className="error">{customValidationMessage}</div> : null}
       {isValid ? <br/> : null}
       <div className="grid-container">
-        <button className="col col1" type="toggle" onClick={onGoBack}>
+        <button className="col col1" type="button" onClick={onGoBack}>
           Go Back
         </button>
         <button
           className="col col2"
-          type="toggle"
+          type="button"
           onClick={handleSubmit}
-          disabled={isValid ? "" : 1}
+          disabled={isValid}
         >
           Okay
         </button>

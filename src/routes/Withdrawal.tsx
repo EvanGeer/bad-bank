@@ -25,55 +25,36 @@ export function Withdrawal({onSubmit, balance, onGoBack}) {
       Choose a Dollar Amount
       <div className="grid-container">
         <QuickCashButton
-          className="col col1"
+          // className="col col1"
           amount={20}
           balance={balance}
-        >
-          $20
-        </button>
-        <button
-          className="col col2"
-          type="button"
-          onClick={handleSubmit}
-          disabled={atLeast(80)}
-        >
-          $80
-        </button>
-
-        <button
-          className="col col1"
-          type="button"
-          onClick={handleSubmit}
-          disabled={atLeast(40)}
-        >
-          $40
-        </button>
-        <button
-          className="col col2"
-          type="button"
-          onClick={handleSubmit}
-          disabled={atLeast(100)}
-        >
-          $100
-        </button>
-
-        <button
-          className="col col1"
-          type="button"
-          onClick={handleSubmit}
-          disabled={atLeast(60)}
-        >
-          $60
-        </button>
-        <button
-          className="col col2"
-          type="button"
-          onClick={handleSubmit}
-          disabled={atLeast(200)}
-        >
-          $200
-        </button>
-      </div>
+        />
+        <QuickCashButton
+          // className="col col2"
+          amount={0}
+          balance={balance}
+        />
+        <QuickCashButton
+            // className="col col1"
+            amount={40}
+            balance={balance}
+          />
+          <QuickCashButton
+            // className="col col2"
+            amount={100}
+            balance={balance}
+          />
+          <QuickCashButton
+            // className="col col1"
+            amount={60}
+            balance={balance}
+          />
+          <QuickCashButton
+            // className="col col2"
+            amount={200}
+            balance={balance}
+          />
+        </div>
       <div>Custom Amount</div>
       <small>... in multiples of $20</small>
       <TransferFunds

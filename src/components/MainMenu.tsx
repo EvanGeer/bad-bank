@@ -24,19 +24,19 @@ export function MainMenu({ balance }: { balance: number }) {
           {menuButtons.deposit}
         </Link>
 
-        <div className="col col1">
+        <div className="col col2">
           <QuickCashButton amount={80} balance={balance} />
         </div>
 
         <div className="col1">&nbsp;</div>
 
-        <Link className="col col1" to="/withdrawal">
+        <Link className="col col2" to="/withdrawal">
           {menuButtons.withdrawal}
         </Link>
         <Link className="col col1" to="/statement">
           {menuButtons.statement}
         </Link>
-        <Link className="col col1" to="/transfer">
+        <Link className="col col2" to="/transfer">
           {menuButtons.transfer}
         </Link>
       </div>

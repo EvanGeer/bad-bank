@@ -7,7 +7,7 @@ function QuickCashButton({ amount, balance }: { amount: number, balance: number 
     <button
       className="col col1"
       type="button"
-      onClick={handleSubmit}
+      // onClick={handleSubmit}
       disabled={atLeast(amount)}
     >
       {`$${amount.toString()}`}
