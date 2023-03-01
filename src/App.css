@@ -13,6 +13,10 @@
   }
 }
 
+main {
+  background-color: #282c34;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -43,7 +47,6 @@
   padding: 8px;
   margin: 6px;
   border-radius: 8px;
-  border: 2px #61dafb solid;
 }
 
 .error {
@@ -52,6 +55,7 @@
 }
 
 button {
+  border: 2px #61dafb solid;
   background-color:#61dafb;
   font-weight: bold;
 } 

@@ -1,46 +1,31 @@
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { MainMenu } from "./components/MainMenu";
-import { TransferFunds } from "./components/TransferFundsForm";
+import { AtmMenu } from "./routes/AtmMenu";
+import { TransactForm as TransactForm } from "./components/TransactForm";
+import AccountContext from "./contexts/accountContext";
+import Transactions from "./modules/Transactions";
+import { Validation } from "./modules/Validation";
 import { StatementPage } from "./routes/Statement";
+import { Withdrawal } from "./routes/Withdrawal";
+import Deposit from "./routes/Deposit";
 
 export function Router() {
+  const { account } = useContext(AccountContext);
   return (
     <Routes>
-      <Route path="/" element={<MainMenu balance={0} />} />
-      <Route
-        path="/withdrawal"
-        element={
-          <TransferFunds
-            onSubmit={undefined}
-            isWithdrawal={undefined}
-            balance={undefined}
-            onGoBack={undefined}
-          />
-        }
-      />
-      <Route
-        path="/deposit"
-        element={
-          <TransferFunds
-            onSubmit={undefined}
-            isWithdrawal={undefined}
-            balance={undefined}
-            onGoBack={undefined}
-          />
-        }
-      />
+      <Route path="/" element={<AtmMenu balance={0} />} />
+      <Route path="/withdrawal" element={<Withdrawal />} />
+      <Route path="/deposit" element={<Deposit />} />
       <Route
         path="/transfer"
         element={
-          <TransferFunds
-            onSubmit={undefined}
-            isWithdrawal={undefined}
-            balance={undefined}
-            onGoBack={undefined}
+          <TransactForm
+            validations={[Validation.isGreaterThenZero]}
+            transaction={Transactions.deposit}
           />
         }
       />
-      <Route path="/statement" element={<StatementPage statement={null} />} />
+      <Route path="/statement" element={<StatementPage />} />
     </Routes>
   );
 }

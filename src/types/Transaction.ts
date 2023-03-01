@@ -1,6 +1,6 @@
 import TransactionType from "./TransactionType";
 
-type Transaction = {
+interface Transaction {
     date: Date;
     amount: number;
     newTotal: number;

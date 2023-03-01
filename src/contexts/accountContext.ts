@@ -1,0 +1,11 @@
+import { createContext, useContext } from "react";
+import Account from "../types/Account";
+
+interface accContext {
+    account: Account
+    setAccount: React.Dispatch<React.SetStateAction<Account>>
+}
+
+const AccountContext = createContext<any>(null);
+
+export default AccountContext;

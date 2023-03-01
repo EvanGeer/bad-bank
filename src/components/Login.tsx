@@ -1,32 +1,6 @@
-import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import a from "react-bootstrap/Button";
+import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { HashRouter, Link } from "react-router-dom";
-import { Router } from "../Router";
-
-// const options = [
-//   {
-//     name: "Enable backdrop (default)",
-//     scroll: false,
-//     backdrop: true,
-//   },
-//   {
-//     name: "Disable backdrop",
-//     scroll: false,
-//     backdrop: false,
-//   },
-//   {
-//     name: "Enable body scrolling",
-//     scroll: true,
-//     backdrop: false,
-//   },
-//   {
-//     name: "Enable both scrolling & backdrop",
-//     scroll: true,
-//     backdrop: true,
-//   },
-// ];
 
 export default function Login() {
   const [show, setShow] = useState(false);
@@ -46,9 +20,8 @@ export default function Login() {
 
         }}
       />
-      {/* <Button variant="primary" onClick={toggleShow} className="me-2">
-        Sprite
-      </Button> */}
+
+
       <Offcanvas
         show={show}
         placement="end"
@@ -73,26 +46,14 @@ export default function Login() {
             <Offcanvas.Title className="me-auto p-2"> User Name</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <HashRouter>
+          {/* <HashRouter> */}
             <Link to={"Personal"}>Personal Info</Link>
             <br/>
             <Link to="LogOut">Log Out</Link>
-          </HashRouter>
+          {/* </HashRouter> */}
           {/* <br /> */}
         </Offcanvas.Body>
       </Offcanvas>
     </>
   );
 }
-
-// function Example() {
-//   return (
-//     <>
-//       {options.map((props, idx) => (
-//         <OffCanvasExample key={idx} {...props} />
-//       ))}
-//     </>
-//   );
-// }
-
-// render(<Example />);

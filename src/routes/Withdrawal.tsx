@@ -1,68 +1,38 @@
 import React from "react";
+import { useContext } from "react";
 import QuickCashButton from "../components/QuickCashButton";
-import {TransferFunds} from "../components/TransferFundsForm";
+import { TransactForm } from "../components/TransactForm";
+import AccountContext from "../contexts/accountContext";
+import Transactions from "../modules/Transactions";
+import { Validation } from "../modules/Validation";
 
-export function Withdrawal({onSubmit, balance, onGoBack}) {
-    const handleSubmit = (e) => {
-        let dollarAmount = e.target.textContent;
-        console.log(dollarAmount);
-        onSubmit(dollarAmount);
-    }
-    
-    const isIncrementOf20 = (val) => {
-      console.log(`${val} % 20 = ${val % 20}`)
-      let isValid = val === undefined || val % 20 === 0;
-      let validation = {
-        result: isValid,
-        message: `${val} is not a multiple of 20...`
-      }
-      console.log(validation);
-      return validation;
-    }
+export function Withdrawal() {
+  const { account } = useContext(AccountContext);
 
   return (
     <>
       Choose a Dollar Amount
-      <div className="grid-container">
-        <QuickCashButton
-          // className="col col1"
-          amount={20}
-          balance={balance}
-        />
-        <QuickCashButton
-          // className="col col2"
-          amount={0}
-          balance={balance}
-        />
-        <QuickCashButton
-            // className="col col1"
-            amount={40}
-            balance={balance}
-          />
-          <QuickCashButton
-            // className="col col2"
-            amount={100}
-            balance={balance}
-          />
-          <QuickCashButton
-            // className="col col1"
-            amount={60}
-            balance={balance}
-          />
-          <QuickCashButton
-            // className="col col2"
-            amount={200}
-            balance={balance}
-          />
-        </div>
+      <div className="row">
+        <QuickCashButton amount={20} />
+        <QuickCashButton amount={80} />
+      </div>
+      <div className="row">
+        <QuickCashButton amount={40} />
+        <QuickCashButton amount={100} />
+      </div>
+      <div className="row">
+        <QuickCashButton amount={60} />
+        <QuickCashButton amount={200} />
+      </div>
       <div>Custom Amount</div>
       <small>... in multiples of $20</small>
-      <TransferFunds
-        customValidation={isIncrementOf20}
-        onGoBack={onGoBack}
-        balance={balance}
-        onSubmit={onSubmit}
-        isWithdrawal={true}
+      <TransactForm
+        validations={[
+          (x) => Validation.wontOverdraft(x, account.balance),
+          Validation.isGreaterThenZero,
+          Validation.isIncrementOfTwenty,
+        ]}
+        transaction={Transactions.withdrawal}
       />
     </>
   );

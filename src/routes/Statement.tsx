@@ -1,15 +1,32 @@
 import Transaction from "../types/Transaction";
 import TransactionCard from "../components/TransactionCard";
+import { useContext } from "react";
+import AccountContext from "../contexts/accountContext";
+import PrimaryButton from "../components/PrimayButton";
+import { useNavigate } from "react-router-dom";
 
-export function StatementPage({ statement }: { statement: Transaction[] }) {
+export function StatementPage() {
+  const { account } = useContext(AccountContext);
+  const history = useNavigate();
+
   return (
     <>
-      <div className="grid-container">
-        {statement.map((x) => (
-          <TransactionCard transaction={x} />
-        ))}
+      <div className="container">
+        {account.ledger
+          .sort((x: Transaction, y: Transaction) => {
+            return (
+              new Date(x.date).getTime() -
+              new Date(y.date).getTime()
+            );
+          })
+          .reverse()
+          .map((x: Transaction) => (
+            <TransactionCard transaction={x} />
+          ))}
       </div>
-      <button className="col">Go Back</button>
+      <div className="row">
+        <PrimaryButton text="Go Back" action={() => history(-1)} />
+      </div>
     </>
   );
 }
