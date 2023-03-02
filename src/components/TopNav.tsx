@@ -1,7 +1,6 @@
-import { Dropdown, Nav, Navbar, NavItem, NavLink } from "react-bootstrap";
-import { HashRouter, Link } from "react-router-dom";
+import { Dropdown, Nav, Navbar, NavItem } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import Login from "./Login";
-import { LinkContainer } from "react-router-bootstrap";
 
 export default function TopNav() {
   return (
@@ -10,7 +9,6 @@ export default function TopNav() {
       expand={true}
       variant="dark"
     >
-
       <Navbar.Brand
         title="React-Bootstrap"
         href="https://github.com/react-bootstrap/react-bootstrap"
@@ -20,26 +18,19 @@ export default function TopNav() {
       </Navbar.Brand>
 
       <Nav className="me-auto">
-        <LinkContainer to={"/"}>
-          <NavLink>Home</NavLink>
-        </LinkContainer>
-        <LinkContainer to={"/deposit"}>
-          <Nav.Link>Deposit</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to={"/withdrawal"}>
-          <Nav.Link>Withdrawal</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to={"/statement"}>
-          <Nav.Link>All Data</Nav.Link>
-        </LinkContainer>
-        {/* <LinkContainer to={"/deposit"}>
-          <Nav.Link>ATM</Nav.Link>
-        </LinkContainer>
-        <LinkContainer to={"/deposit"}>
-          <Nav.Link>New Account</Nav.Link>
-        </LinkContainer> */}
+        <Nav.Link as={NavLink} to="/">
+          Home
+        </Nav.Link>
+        <Nav.Link as={NavLink} to="/deposit">
+          Deposit
+        </Nav.Link>
+        <Nav.Link as={NavLink} to="/withdrawal">
+          Withdrawal
+        </Nav.Link>
+        <Nav.Link as={NavLink} to="/statement">
+          All Data
+        </Nav.Link>
       </Nav>
-
 
       <Nav className="d-flex">
         <Login />
