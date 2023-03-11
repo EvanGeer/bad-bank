@@ -17,7 +17,7 @@ export function App() {
     accountNumber: "chx123",
     accountName: "Checking",
     accountType: AccountType.CHECKING,
-    balance: 13,
+    balance: 100,
     ledger: [],
   });
 
@@ -25,7 +25,7 @@ export function App() {
     <div className={classNames("main-wrapper", "main-wrapper-responsive")}>
       {/* <Layout> */}
       <HashRouter>
-        <TopNav />
+        {/* <TopNav /> */}
         <SidebarNav />
         <main className="m-0 p-0 main-container container-fluid">
           {/* {children} */}

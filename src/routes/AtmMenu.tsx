@@ -3,7 +3,7 @@ import menuButtons from "../types/menuButtons";
 import PrimaryButton from "../components/PrimayButton";
 import QuickCashButton from "../components/QuickCashButton";
 
-export function AtmMenu({ balance }: { balance: number }) {
+export function AtmMenu() {
 
   const routeTo = useNavigate();
 
@@ -13,10 +13,11 @@ export function AtmMenu({ balance }: { balance: number }) {
 
         <div className="row">
           <PrimaryButton
+            data-testid="atm-deposit"
             text={menuButtons.deposit}
             action={() => routeTo("/deposit")}
           />
-          <QuickCashButton amount={80} />
+          <QuickCashButton amount={80} data-testid="fast-cash-80"/>
         </div>
         <div className="row">
 

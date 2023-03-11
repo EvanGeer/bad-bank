@@ -34,10 +34,11 @@ export function TransactForm({
       .map((x) => x(Number(value)))
       .find((x) => !x.passes);
 
-    setIsInvalid(failedValidation ? true : false);
+    const newIsValid = failedValidation ? true : false;
+    setIsInvalid(newIsValid);
     setErrorMessage(failedValidation?.message ?? "");
 
-    console.log(isInValid);
+    console.log(newIsValid);
   };
 
   const handleChange = (e: any) => {
@@ -45,12 +46,22 @@ export function TransactForm({
   };
 
   const submitOnEnterKey = (e: any) => {
+    console.log(e);
     if (e.which !== 13) return;
+    console.log("enter key")
     handleSubmit();
   };
 
   const handleSubmit = () => {
-    if (isInValid) return;
+    console.log("submit");
+    console.warn(errorMessage);
+
+    const failedValidation = validations
+    .map((x) => x(Number(value)))
+    .find((x) => !x.passes);
+
+  const newIsValid = failedValidation ? true : false;
+    if (newIsValid) return;
 
     const updatedAccount = transaction(account, Number(value));
     setAccount(updatedAccount);
@@ -63,6 +74,7 @@ export function TransactForm({
       {/* Text Entry */}
       <div className="grid-container">
         <input
+          data-testid="transaction-amount-input"
           className={`t-entry${!isInValid ? "" : " invalid"}`}
           type="number"
           placeholder="0.00"
@@ -77,7 +89,7 @@ export function TransactForm({
       {/* Buttons */}
       <div className="row">
         <PrimaryButton text="Go Back" action={() => history(-1)} />
-        <PrimaryButton text="Okay" disabled={isInValid} action={handleSubmit} />
+        <PrimaryButton text="Okay" action={handleSubmit} />
       </div>
     </>
   );

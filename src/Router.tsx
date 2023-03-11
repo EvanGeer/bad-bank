@@ -13,7 +13,7 @@ export function Router() {
   const { account } = useContext(AccountContext);
   return (
     <Routes>
-      <Route path="/" element={<AtmMenu balance={0} />} />
+      <Route path="/" element={<AtmMenu />} />
       <Route path="/withdrawal" element={<Withdrawal />} />
       <Route path="/deposit" element={<Deposit />} />
       <Route

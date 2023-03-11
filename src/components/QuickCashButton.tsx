@@ -23,6 +23,7 @@ function QuickCashButton({ amount }: { amount: number }) {
   return (
     <>
       <button
+        data-testid={`fast-cash-${amount}`}
         className="col fluid align-content"
         type="button"
         onClick={handleSubmit}

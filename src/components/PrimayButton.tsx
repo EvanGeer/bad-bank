@@ -1,6 +1,7 @@
-function PrimaryButton({text, action, disabled = false}: {text: string, action: () => void, disabled?: boolean}) {
+function PrimaryButton({text, action, disabled = false, testid}: {text: string, action: () => void, disabled?: boolean, testid?:string}) {
   return (
     <button
+      data-testid={testid ?? text}
       className="col fluid align-content"
       type="button"
       onClick={action}

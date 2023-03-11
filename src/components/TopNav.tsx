@@ -18,16 +18,16 @@ export default function TopNav() {
       </Navbar.Brand>
 
       <Nav className="me-auto">
-        <Nav.Link as={NavLink} to="/">
+        <Nav.Link as={NavLink} to="/" data-testid="Nav-Home"> 
           Home
         </Nav.Link>
-        <Nav.Link as={NavLink} to="/deposit">
+        <Nav.Link as={NavLink} to="/deposit" data-testid="Nav-Deposit">
           Deposit
         </Nav.Link>
-        <Nav.Link as={NavLink} to="/withdrawal">
+        <Nav.Link as={NavLink} to="/withdrawal" data-testid="Nav-Withdrawal">
           Withdrawal
         </Nav.Link>
-        <Nav.Link as={NavLink} to="/statement">
+        <Nav.Link as={NavLink} to="/statement" data-testid="Nav-Statement">
           All Data
         </Nav.Link>
       </Nav>
