@@ -27,7 +27,7 @@ beforeAll(() => {});
 beforeEach(() => {});
 afterEach(() => {});
 
-it("Fast Cash $80", () => {
+it("should withdrawal Fast Cash $80 from main menu page", () => {
   // arrange
   render(
     <TestWrapper startingBalance={100}>
@@ -44,7 +44,7 @@ it("Fast Cash $80", () => {
   expect(balanceElement()).toHaveTextContent("$20.00");
 });
 
-it("Deposit $75", () => {
+it("should deposit $75", () => {
   // arrange
   render(
     <TestWrapper startingBalance={100}>
@@ -68,7 +68,7 @@ it("Deposit $75", () => {
   expect(balanceElement()).toHaveTextContent("$175.00");
 });
 
-it("Withdrawal $80", () => {
+it("should withdrawal $60", () => {
   // arrange
   render(
     <TestWrapper startingBalance={100}>
