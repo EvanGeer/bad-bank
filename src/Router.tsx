@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
-import { AtmMenu } from "./routes/AtmMenu";
+import { AtmMenu } from "./pages/AtmMenu";
 import { TransactForm as TransactForm } from "./components/TransactForm";
 import AccountContext from "./contexts/accountContext";
 import Transactions from "./modules/Transactions";
 import { Validation } from "./modules/Validation";
-import { StatementPage } from "./routes/Statement";
-import { Withdrawal } from "./routes/Withdrawal";
-import Deposit from "./routes/Deposit";
+import { StatementPage } from "./pages/Statement";
+import { Withdrawal } from "./pages/Withdrawal";
+import Deposit from "./pages/Deposit";
 
 export function Router() {
   const { account } = useContext(AccountContext);

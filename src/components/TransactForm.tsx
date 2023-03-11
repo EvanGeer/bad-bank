@@ -46,7 +46,7 @@ export function TransactForm({
   };
 
   const submitOnEnterKey = (e: any) => {
-    console.log(e);
+    // console.log(e);
     if (e.which !== 13) return;
     console.log("enter key")
     handleSubmit();

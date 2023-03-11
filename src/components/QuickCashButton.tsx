@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
 import AccountContext from "../contexts/accountContext";
 import Transactions from "../modules/Transactions";
@@ -7,11 +7,14 @@ import TransactionToast from "./TransactionToast";
 
 function QuickCashButton({ amount }: { amount: number }) {
   const { account, setAccount } = useContext(AccountContext);
-  const [transaction, setTransaction] = useState<Transaction>();
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [val, setVal] = useState(amount);
 
-  const atLeast = (val: number) => {
-    return val > account.balance ? true : false;
-  };
+  useEffect(() => {
+    console.log(account);
+    const newDisabledState = val > account.balance;
+    setIsDisabled(newDisabledState);
+  }, [account.balance]);
 
   const handleSubmit = () => {
     const updatedAccount = Transactions.withdrawal(account, amount);
@@ -23,11 +26,11 @@ function QuickCashButton({ amount }: { amount: number }) {
   return (
     <>
       <button
-        data-testid={`fast-cash-${amount}`}
+        data-testid={`quick-cash-${amount}`}
         className="col fluid align-content"
         type="button"
         onClick={handleSubmit}
-        disabled={atLeast(amount)}
+        disabled={isDisabled}
         style={{
           width: "300px",
         }}
