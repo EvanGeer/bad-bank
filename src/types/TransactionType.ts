@@ -1,6 +1,6 @@
 enum TransactionType {
-    WITHDRAWAL = 'WITHDRAWAL',
-    DEPOSIT = 'DEPOSIT',
+    WITHDRAWAL = 'Withdraw',
+    DEPOSIT = 'Deposit',
     // TRANSFER = 'TRANSFER'
 }
 

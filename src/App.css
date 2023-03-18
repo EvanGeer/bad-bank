@@ -19,7 +19,6 @@ main {
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -76,14 +75,7 @@ small {
   font-size:medium;
 }
 
-.t-entry {
-  grid-column: 1 / span 2;
-  padding: 8px;
-  margin: 4px 80px ;
-  border-radius: 8px;
-  
-  /* -ms-grid-column-span: 2; */
-}
+
 
 .col1 {
   grid-column: 1;

@@ -5,6 +5,7 @@ import { TransactForm } from "../components/TransactForm";
 import AccountContext from "../contexts/accountContext";
 import Transactions from "../modules/Transactions";
 import { Validation } from "../modules/Validation";
+import TransactionType from "../types/TransactionType";
 
 export function Withdrawal() {
   const { account } = useContext(AccountContext);
@@ -33,6 +34,7 @@ export function Withdrawal() {
           Validation.isIncrementOfTwenty,
         ]}
         transaction={Transactions.withdrawal}
+        transactionType={TransactionType.WITHDRAWAL}
       />
     </>
   );

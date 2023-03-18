@@ -5,7 +5,7 @@ import "../App.css";
 export function Home() {
   return (
     <Container>
-      <Card bg="dark" className="shadow d-flex text-center text-muted">
+      <Card bg="dark" className="shadow d-flex text-center text-muted mb-4">
         <img src={logo} className="App-logo" alt="logo" />
         <h1 className="text-primary align-self-center">
           Welcome to React Fire Bank

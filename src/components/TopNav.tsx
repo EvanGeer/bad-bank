@@ -56,7 +56,7 @@ export default function TopNav() {
             <TopNavLink
               to="/withdrawal"
               id="Withdrawal"
-              text="Withdrawal"
+              text="Withdraw"
               tooltip="Withdrawal Cash"
             />
             <TopNavLink

@@ -1,7 +1,7 @@
 
 enum menuButtons {
   mainMenu = 'Main Menu',
-  withdrawal = 'Cash Withdrawal',
+  withdrawal = 'Withdrawal',
   deposit = 'Deposit',
   quickCash80 = 'Quick Cash $80',
   statement = 'Statement',

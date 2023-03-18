@@ -10,8 +10,8 @@ function AccountInfo() {
 
   return (
     <>
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="text-primary">Welcome to React Bank</h1>
+      {/* <img src={logo} className="App-logo" alt="logo" />
+      <h1 className="text-primary">Welcome to React Bank</h1> */}
       <h2 data-testid="account-balance-header">
         {account.name}: {currency.format(account.balance)}
       </h2>

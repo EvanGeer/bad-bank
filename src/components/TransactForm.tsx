@@ -1,15 +1,20 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Card } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router-dom";
 import AccountContext from "../contexts/accountContext";
 import Account from "../types/Account";
+import TransactionType from "../types/TransactionType";
+import AccountInfo from "./AccountInfo";
 import PrimaryButton from "./PrimayButton";
 
 export function TransactForm({
   transaction,
   validations,
+  transactionType,
 }: {
   transaction: (a: Account, x: number) => Account;
   validations: ((x: number) => { passes: boolean; message: string })[];
+  transactionType: TransactionType;
 }) {
   const [value, setValue] = useState<number | string>("");
   const [isInValid, setIsInvalid] = useState(false);
@@ -48,7 +53,7 @@ export function TransactForm({
   const submitOnEnterKey = (e: any) => {
     // console.log(e);
     if (e.which !== 13) return;
-    console.log("enter key")
+    console.log("enter key");
     handleSubmit();
   };
 
@@ -57,40 +62,48 @@ export function TransactForm({
     console.warn(errorMessage);
 
     const failedValidation = validations
-    .map((x) => x(Number(value)))
-    .find((x) => !x.passes);
+      .map((x) => x(Number(value)))
+      .find((x) => !x.passes);
 
-  const newIsValid = failedValidation ? true : false;
+    const newIsValid = failedValidation ? true : false;
     if (newIsValid) return;
 
     const updatedAccount = transaction(account, Number(value));
     setAccount(updatedAccount);
   };
 
-  const history = useNavigate();
+  const navTo = useNavigate();
 
   return (
     <>
-      {/* Text Entry */}
-      <div className="grid-container">
-        <input
-          data-testid="transaction-amount-input"
-          className={`t-entry${!isInValid ? "" : " invalid"}`}
-          type="number"
-          placeholder="0.00"
-          value={value}
-          onChange={handleChange}
-          onKeyDown={submitOnEnterKey}
-        />
-      </div>
-      {/* Validation Message */}
-      {isInValid ? <div className="error">{errorMessage}</div> : null}
+      <Card bg="dark" className="shadow border border-secondary text-center">
+        <Card.Header className="bg-secondary bg-opacity-25">
+          <AccountInfo />
+        </Card.Header>
+        {/* Text Entry */}
+        <div className="d-flex flex-row flex-wrap p-2 ps-3 pr-4">
+          <label>{transactionType}</label>
+          <input
+            data-testid="transaction-amount-input"
+            className={`rounded ms-3 me-3 t-entry${
+              !isInValid ? "" : " invalid"
+            }`}
+            type="number"
+            placeholder="0.00"
+            value={value}
+            onChange={handleChange}
+            onKeyDown={submitOnEnterKey}
+          />
+        </div>
+        {/* Validation Message */}
+        {isInValid ? <div className="error">{errorMessage}</div> : null}
 
-      {/* Buttons */}
-      <div className="row">
-        <PrimaryButton text="Go Back" action={() => history(-1)} />
-        <PrimaryButton text="Okay" action={handleSubmit} />
-      </div>
+        {/* Buttons */}
+        <div className="d-flex flex-row flex-wrap p-2 pl-4 pr-4">
+          <PrimaryButton text="Home" action={() => navTo("/")} />
+          <PrimaryButton disabled={isInValid} text={transactionType} action={handleSubmit} />
+        </div>
+      </Card>
     </>
   );
 }

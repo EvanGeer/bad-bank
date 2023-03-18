@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 export function StatementPage() {
   const { account } = useContext(AccountContext);
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -22,7 +22,7 @@ export function StatementPage() {
           ))}
       </div>
       <div className="row">
-        <PrimaryButton text="Go Back" action={() => history(-1)} />
+        <PrimaryButton text="Home" action={() => navigate("/")} />
       </div>
     </>
   );
