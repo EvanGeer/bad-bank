@@ -1,16 +1,12 @@
-import {
-  Dropdown,
-  Nav,
-  Navbar,
-  NavItem,
-  OverlayTrigger,
-  Tooltip,
-} from "react-bootstrap";
+import { Nav, Navbar, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
+import { useFirestore } from "../firebase/useFirestore";
 import Login from "./Login";
 
 export default function TopNav() {
-  function TopNaLink({
+  const { user, setUser } = useFirestore();
+
+  function TopNavLink({
     id,
     text,
     to,
@@ -48,25 +44,29 @@ export default function TopNav() {
       </Navbar.Brand>
 
       <Nav className="me-auto">
-        <TopNaLink to="/" id="Home" text="Home" tooltip="Main Menu Page" />
-        <TopNaLink
-          to="/deposit"
-          id="Deposit"
-          text="Deposit"
-          tooltip="Deposit Cash"
-        />
-        <TopNaLink
-          to="/withdrawal"
-          id="Withdrawal"
-          text="Withdrawal"
-          tooltip="Withdrawal Cash"
-        />
-        <TopNaLink
-          to="/statement"
-          id="Statement"
-          text="All Data"
-          tooltip="View Ledger"
-        />
+        <TopNavLink to="/" id="Home" text="Home" tooltip="Main Menu Page" />
+        {user ? (
+          <>
+            <TopNavLink
+              to="/deposit"
+              id="Deposit"
+              text="Deposit"
+              tooltip="Deposit Cash"
+            />
+            <TopNavLink
+              to="/withdrawal"
+              id="Withdrawal"
+              text="Withdrawal"
+              tooltip="Withdrawal Cash"
+            />
+            <TopNavLink
+              to="/statement"
+              id="Statement"
+              text="All Data"
+              tooltip="View Ledger"
+            />
+          </>
+        ) : null}
       </Nav>
 
       <Nav className="d-flex">

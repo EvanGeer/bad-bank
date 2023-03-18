@@ -8,24 +8,23 @@ import { Validation } from "./modules/Validation";
 import { StatementPage } from "./pages/Statement";
 import { Withdrawal } from "./pages/Withdrawal";
 import Deposit from "./pages/Deposit";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase/auth";
+import { useFirestore } from "./firebase/useFirestore";
+import { Home } from "./pages/Home";
 
 export function Router() {
-  const { account } = useContext(AccountContext);
+  const { user } = useFirestore();
+
+
+
   return (
     <Routes>
-      <Route path="/" element={<AtmMenu />} />
-      <Route path="/withdrawal" element={<Withdrawal />} />
-      <Route path="/deposit" element={<Deposit />} />
-      <Route
-        path="/transfer"
-        element={
-          <TransactForm
-            validations={[Validation.isGreaterThenZero]}
-            transaction={Transactions.deposit}
-          />
-        }
-      />
-      <Route path="/statement" element={<StatementPage />} />
+      <Route path="/" element={user ? <AtmMenu /> : <Home />} />
+      <Route path="/withdrawal" element={user ? <Withdrawal /> : <Home />} />
+      <Route path="/deposit" element={user ? <Deposit /> : <Home />} />
+
+      <Route path="/statement" element={user ? <StatementPage /> : <Home />} />
     </Routes>
   );
 }

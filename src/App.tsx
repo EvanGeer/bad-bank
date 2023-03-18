@@ -11,17 +11,18 @@ import { useFirestore } from "./firebase/useFirestore";
 
 export function App() {
   const { account, setAccount } = useFirestore();
+  const { user, setUser } = useFirestore();
 
   return (
     <div className={classNames("main-wrapper", "main-wrapper-responsive")}>
       <HashRouter>
         <TopNav />
-        <SidebarNav />
+        {user ? <SidebarNav /> : null}
         <main className="m-0 p-0 main-container container-fluid">
           <AccountContext.Provider value={{ account, setAccount }}>
             <TransactionToast />
             <Container className="App-header fluid justify-content-center me-auto">
-              <AccountInfo />
+              {user ? <AccountInfo /> : null}
               <Router />
             </Container>
           </AccountContext.Provider>
