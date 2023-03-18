@@ -21,9 +21,9 @@ it('should withdraw $20, then $30', () => {
 
     // assert
     const expected = {
-        accountNumber:'123',
-        accountName:'Checking',
-        accountType:AccountType.CHECKING,
+        number:'123',
+        name:'Checking',
+        type:AccountType.CHECKING,
         balance:110,
         ledger:[{
             amount: 20,
