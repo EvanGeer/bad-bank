@@ -1,8 +1,38 @@
-import { Dropdown, Nav, Navbar, NavItem } from "react-bootstrap";
+import {
+  Dropdown,
+  Nav,
+  Navbar,
+  NavItem,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
 
 export default function TopNav() {
+  function TopNaLink({
+    id,
+    text,
+    to,
+    tooltip,
+  }: {
+    id: string;
+    text: string;
+    to: string;
+    tooltip: string;
+  }) {
+    return (
+      <OverlayTrigger
+        overlay={<Tooltip id={`ToolTip-${id}`}>{tooltip}</Tooltip>}
+        placement="bottom"
+      >
+        <Nav.Link as={NavLink} to={to} data-testid={`Nav-${id}`}>
+          {text}
+        </Nav.Link>
+      </OverlayTrigger>
+    );
+  }
+
   return (
     <Navbar
       className="main-header bg-dark text-light"
@@ -18,18 +48,25 @@ export default function TopNav() {
       </Navbar.Brand>
 
       <Nav className="me-auto">
-        <Nav.Link as={NavLink} to="/" data-testid="Nav-Home"> 
-          Home
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="/deposit" data-testid="Nav-Deposit">
-          Deposit
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="/withdrawal" data-testid="Nav-Withdrawal">
-          Withdrawal
-        </Nav.Link>
-        <Nav.Link as={NavLink} to="/statement" data-testid="Nav-Statement">
-          All Data
-        </Nav.Link>
+        <TopNaLink to="/" id="Home" text="Home" tooltip="Main Menu Page" />
+        <TopNaLink
+          to="/deposit"
+          id="Deposit"
+          text="Deposit"
+          tooltip="Deposit Cash"
+        />
+        <TopNaLink
+          to="/withdrawal"
+          id="Withdrawal"
+          text="Withdrawal"
+          tooltip="Withdrawal Cash"
+        />
+        <TopNaLink
+          to="/statement"
+          id="Statement"
+          text="All Data"
+          tooltip="View Ledger"
+        />
       </Nav>
 
       <Nav className="d-flex">
