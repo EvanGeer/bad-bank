@@ -2,11 +2,13 @@ import { useState } from "react";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import FirebaseLogin from "../firebase/FirebaseLogin";
+import { useFirestore } from "../firebase/useFirestore";
 import { FirebaseUser } from "../types/User";
 
 export default function Login() {
+  const { user, setUser }  = useFirestore();
   const [show, setShow] = useState(false);
-  const [user, setUser] = useState<FirebaseUser | null>(null);
+  // const [user, setUser] = useState<FirebaseUser | null>(null);
 
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
@@ -48,7 +50,7 @@ export default function Login() {
           <Offcanvas.Title className="me-auto p-2">{user?.displayName}</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <FirebaseLogin onLogIn={(u) => setUser(u)} onLogOut={() => setUser(null)} />
+          <FirebaseLogin onLogIn={(u) => console.log(u)} onLogOut={() => setUser(null)} />
           {/* <HashRouter> */}
           {/* <Link to={"Personal"}>Personal Info</Link> */}
           <br />

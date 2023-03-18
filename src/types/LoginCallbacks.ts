@@ -1,6 +1,6 @@
-import { FirebaseUser } from "./User";
+import User, { FirebaseUser } from "./User";
 
 export interface LoginCallbacks {
-  onLogIn: (user: FirebaseUser | null) => void;
+  onLogIn: (user: User | null) => void;
   onLogOut?: () => void;
 }

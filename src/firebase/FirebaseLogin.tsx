@@ -3,11 +3,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth, signInWithGoogle, logInWithEmailAndPassword } from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { LoginCallbacks } from "../types/LoginCallbacks";
+import { db } from "./firestoreSetup";
+import { useFirestore } from "./useFirestore";
 
 function FirebaseLogin(callbacks : LoginCallbacks) {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [user, loading, error] = useAuthState(auth);
+
 //   const navigate = useNavigate();
   useEffect(() => {
     if (loading) {
@@ -17,7 +20,12 @@ function FirebaseLogin(callbacks : LoginCallbacks) {
     if (user) {
         // navigate("/dashboard");
         console.log(`Logged in ${user.uid}`);
-        callbacks.onLogIn(user);
+        // callbacks.onLogIn({
+        //   name: user?.displayName ?? "",
+        //   id: user?.uid ?? "",
+        //   profileImage: user?.photoURL ?? "",
+        //   accounts: 
+        // });
     }
   }, [user, loading]);
 

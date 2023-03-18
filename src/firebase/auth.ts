@@ -1,5 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
 import {
     GoogleAuthProvider,
     getAuth,
@@ -12,30 +10,10 @@ import {
 
 
 // Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { app } from "./firestoreSetup";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDfI_0MR_mPpd6le_nGCShVbV0JuH-50cM",
-  authDomain: "eg-game.firebaseapp.com",
-  databaseURL: "https://eg-game-default-rtdb.firebaseio.com",
-  projectId: "eg-game",
-  storageBucket: "eg-game.appspot.com",
-  messagingSenderId: "294354380397",
-  appId: "1:294354380397:web:6e41f42b39b03d691c4164",
-  measurementId: "G-SKV12JEP5Z"
-};
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
-
-// Initialize Realtime Database and get a reference to the service
-export const database = getDatabase(app);
 export const auth = getAuth(app);
 
 export const logInWithEmailAndPassword = async (email : string, password : string) => {
