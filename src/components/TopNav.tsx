@@ -9,6 +9,12 @@ import { NavLink } from "react-router-dom";
 import { useFirestore } from "../firebase/useFirestore";
 import LoginFlyout from "./LoginFlyout";
 import fiREactLogo from "../fiREact.png";
+import {
+  BoxArrowInDownRight,
+  BoxArrowUpRight,
+  ClockHistory,
+  House,
+} from "react-bootstrap-icons";
 
 export default function TopNav() {
   const { user, setUser } = useFirestore();
@@ -16,11 +22,13 @@ export default function TopNav() {
   function TopNavLink({
     id,
     text,
+    icon = null,
     to,
     tooltip,
   }: {
     id: string;
     text: string;
+    icon?: JSX.Element | null;
     to: string;
     tooltip: string | JSX.Element;
   }) {
@@ -30,7 +38,14 @@ export default function TopNav() {
         placement="bottom"
       >
         <Nav.Link as={NavLink} to={to} data-testid={`Nav-${id}`}>
-          {text}
+          <Container className="p-0 d-flex flew-wrap align-items-center">
+            <div className="d-flex align-self-center p-1">
+              {icon}
+            </div>
+            <div className="d-none d-sm-block">
+              {text}
+            </div>
+          </Container>
         </Nav.Link>
       </OverlayTrigger>
     );
@@ -48,28 +63,37 @@ export default function TopNav() {
         className="d-block flex-row text-light justify-content-center p-0 d-flex"
       >
         <Container className="ms-2 ps-3">
-            <img src={fiREactLogo} style={{ height: "30px" }} />
+          <img src={fiREactLogo} style={{ height: "30px" }} />
         </Container>
         {/* <span className="react-bootstrap-img" /> */}
       </Navbar.Brand>
 
       <Nav className="me-auto" variant="pills">
-        <TopNavLink to="/" id="Home" text="Home" tooltip="Main Menu Page" />
+        <TopNavLink
+          icon={<House />}
+          to="/"
+          id="Home"
+          text="Home"
+          tooltip="Main Menu Page"
+        />
         {user ? (
           <>
             <TopNavLink
+              icon={<BoxArrowInDownRight />}
               to="/deposit"
               id="Deposit"
               text="Deposit"
               tooltip="Deposit Cash"
             />
             <TopNavLink
+              icon={<BoxArrowUpRight />}
               to="/withdrawal"
               id="Withdrawal"
               text="Withdraw"
               tooltip="Withdrawal Cash"
             />
             <TopNavLink
+              icon={<ClockHistory />}
               to="/statement"
               id="Statement"
               text="All Data"
@@ -78,11 +102,15 @@ export default function TopNav() {
           </>
         ) : (
           <TopNavLink
-          to="/create-account"
-          id="create-account"
-          text="Create Account"
-          tooltip={<>Sign up for fi<u>re</u>Bank</>}
-        />
+            to="/create-account"
+            id="create-account"
+            text="Create Account"
+            tooltip={
+              <>
+                Sign up for fi<u>re</u>Bank
+              </>
+            }
+          />
         )}
       </Nav>
 
