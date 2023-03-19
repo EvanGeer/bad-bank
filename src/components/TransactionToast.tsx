@@ -11,10 +11,12 @@ export default function TransactionToast() {
   const [newTransactions, setNewTransactions] = useState<Transaction[]>([]);
 
   const { account } = useContext(AccountContext);
+  const [ledgerLength, setLedgerLength] = useState(account?.ledger.length)
 
   useEffect(() => {
     console.log("ledger updated");
-    if (!(account?.ledger?.length > 0)) return;
+    if (!(account?.ledger?.length > 0) || account.ledger.length === ledgerLength) return;
+    setLedgerLength(account.ledger.length); // this prevents double toasts resulting from the Firestore onSnapshot updates firing
     console.log("new transaction");
 
     const timeToHideToast = new Date(new Date().getTime() - toastDuration);

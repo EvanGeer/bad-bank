@@ -65,7 +65,7 @@ export function useFirestore() {
       let newAccount = userData?.accts["00001001"] as Account;
 
       if (!newAccount) {
-        newAccount = defaultAccount;
+        newAccount = { ...defaultAccount, balance: 0 };
         const newAccts = { ...userData?.accts, "00001001": newAccount };
         updateDoc(docRef, {
           accts: newAccts,
