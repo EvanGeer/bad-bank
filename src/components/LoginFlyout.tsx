@@ -5,8 +5,8 @@ import FirebaseLogin from "../firebase/FirebaseLogin";
 import { useFirestore } from "../firebase/useFirestore";
 import { FirebaseUser } from "../types/User";
 
-export default function Login() {
-  const { user, setUser }  = useFirestore();
+export default function LoginFlyout() {
+  const { user, setUser } = useFirestore();
   const [show, setShow] = useState(false);
   // const [user, setUser] = useState<FirebaseUser | null>(null);
 
@@ -16,16 +16,22 @@ export default function Login() {
   const UserImage = () => {
     return (
       <div
-        className="link-primary"
+        className="link-primary pe-2"
         onClick={toggleShow}
         style={{ cursor: "pointer" }}
       >
         {user ? (
-          <img
-            src={user.photoURL ?? ""}
-            className="rounded-circle"
-            style={{ width: "50px" }}
-          />
+          user?.photoURL ? (
+            <img
+              src={user.photoURL ?? ""}
+              className="rounded-circle"
+              style={{ width: "40px" }}
+            />
+          ) : (
+            // <p className="pe-4">
+            user?.email
+            // </p>
+          )
         ) : (
           "Login"
         )}
@@ -35,7 +41,7 @@ export default function Login() {
 
   return (
     <>
-      <UserImage />
+      {<UserImage />}
       <Offcanvas
         show={show}
         placement="end"
@@ -47,15 +53,12 @@ export default function Login() {
       >
         <Offcanvas.Header closeButton className="fluid">
           <UserImage />
-          <Offcanvas.Title className="me-auto p-2">{user?.displayName}</Offcanvas.Title>
+          <Offcanvas.Title className="me-auto p-2">
+            {user?.displayName}
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <FirebaseLogin onLogIn={(u) => console.log(u)} onLogOut={() => setUser(null)} />
-          {/* <HashRouter> */}
-          {/* <Link to={"Personal"}>Personal Info</Link> */}
-          <br />
-          {/* </HashRouter> */}
-          {/* <br /> */}
+          <FirebaseLogin onLogOut={() => setUser(null)} />
         </Offcanvas.Body>
       </Offcanvas>
     </>

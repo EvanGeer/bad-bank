@@ -1,7 +1,14 @@
-import { Nav, Navbar, OverlayTrigger, Tooltip } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  OverlayTrigger,
+  Tooltip,
+} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { useFirestore } from "../firebase/useFirestore";
-import Login from "./Login";
+import LoginFlyout from "./LoginFlyout";
+import fiREactLogo from "../fiREact.png";
 
 export default function TopNav() {
   const { user, setUser } = useFirestore();
@@ -15,7 +22,7 @@ export default function TopNav() {
     id: string;
     text: string;
     to: string;
-    tooltip: string;
+    tooltip: string | JSX.Element;
   }) {
     return (
       <OverlayTrigger
@@ -31,19 +38,22 @@ export default function TopNav() {
 
   return (
     <Navbar
-      className="main-header bg-dark text-light"
+      className="main-header bg-dark text-light p-0 pt-2 pb-2"
       expand={true}
       variant="dark"
     >
       <Navbar.Brand
         title="React-Bootstrap"
-        href="https://github.com/react-bootstrap/react-bootstrap"
-        className="d-block text-light"
+        // href="https://github.com/react-bootstrap/react-bootstrap"
+        className="d-block flex-row text-light justify-content-center p-0 d-flex"
       >
-        <span className="react-bootstrap-img" />
+        <Container className="ms-2 ps-3">
+            <img src={fiREactLogo} style={{ height: "30px" }} />
+        </Container>
+        {/* <span className="react-bootstrap-img" /> */}
       </Navbar.Brand>
 
-      <Nav className="me-auto">
+      <Nav className="me-auto" variant="pills">
         <TopNavLink to="/" id="Home" text="Home" tooltip="Main Menu Page" />
         {user ? (
           <>
@@ -66,11 +76,18 @@ export default function TopNav() {
               tooltip="View Ledger"
             />
           </>
-        ) : null}
+        ) : (
+          <TopNavLink
+          to="/create-account"
+          id="create-account"
+          text="Create Account"
+          tooltip={<>Sign up for fi<u>re</u>Bank</>}
+        />
+        )}
       </Nav>
 
       <Nav className="d-flex">
-        <Login />
+        <LoginFlyout />
       </Nav>
     </Navbar>
   );

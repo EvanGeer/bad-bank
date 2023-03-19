@@ -1,4 +1,11 @@
-import { doc, DocumentData, DocumentReference, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {
+  doc,
+  DocumentData,
+  DocumentReference,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Account from "../types/Account";
@@ -12,7 +19,7 @@ export function useFirestore() {
     number: "chx123",
     name: "Checking",
     type: AccountType.CHECKING,
-    balance: 100,
+    balance: NaN,
     ledger: [],
   };
   const [firebaseUser, loading, error] = useAuthState(auth);
@@ -20,7 +27,9 @@ export function useFirestore() {
   const [user, setUser] = useState<User | null>(null);
   const [account, _setAccount] = useState<Account>(defaultAccount);
 
-  const [docRef, setDocRef] = useState<DocumentReference<DocumentData> | null>(null);
+  const [docRef, setDocRef] = useState<DocumentReference<DocumentData> | null>(
+    null
+  );
 
   useEffect(() => {
     if (!firebaseUser) return;
@@ -28,8 +37,8 @@ export function useFirestore() {
     getDoc(_doc).then((docSnapshot) => {
       if (!docSnapshot.exists()) {
         setDoc(_doc, {
-          "00001001": {
-            defaultAccount,
+          accts: {
+            "00001001": {...defaultAccount, balance: 0},
           },
         });
       }
@@ -42,20 +51,30 @@ export function useFirestore() {
     if (!docRef) return;
 
     getDoc(docRef).then((snap) => {
-      const user = snap.data();
-      console.log(user);
-      const newAccount = user?.accts["000055778"] as Account;
+      const userData = snap.data();
+      console.log(userData);
+      let newAccount = userData?.accts["00001001"] as Account;
+
+      if (!newAccount) {
+        newAccount = defaultAccount;
+        const newAccts = { ...userData?.accts,
+          "00001001": newAccount
+         };
+        updateDoc(docRef, {
+          accts: newAccts,
+        });
+      }
       setAccount(newAccount);
     });
   }, [docRef]);
 
   const setAccount = (acct: Account) => {
     _setAccount(acct);
-    
+
     if (!docRef) return;
     updateDoc(docRef, {
       accts: {
-        "000055778": acct,
+        "00001001": acct,
       },
     });
   };

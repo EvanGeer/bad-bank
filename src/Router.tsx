@@ -12,6 +12,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/auth";
 import { useFirestore } from "./firebase/useFirestore";
 import { Home } from "./pages/Home";
+import { CreateAccount } from "./pages/CreateAccount";
 
 export function Router() {
   const { user } = useFirestore();
@@ -25,6 +26,7 @@ export function Router() {
       <Route path="/deposit" element={user ? <Deposit /> : <Home />} />
 
       <Route path="/statement" element={user ? <StatementPage /> : <Home />} />
+      <Route path="/create-account" element={<CreateAccount />} />
     </Routes>
   );
 }

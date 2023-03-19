@@ -6,10 +6,6 @@ function PrimaryButton({text, action, disabled = false, testid}: {text: string, 
       type="button"
       onClick={action}
       disabled={disabled}
-
-      style={{
-        width:"300px"
-      }}
     >
       {text}
     </button>

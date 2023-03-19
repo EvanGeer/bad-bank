@@ -76,7 +76,7 @@ export function TransactForm({
 
   return (
     <>
-      <Card bg="dark" className="shadow border border-secondary text-center">
+      <Card bg="dark" className="w-100 shadow text-center">
         <Card.Header className="bg-secondary bg-opacity-25">
           <AccountInfo />
         </Card.Header>
