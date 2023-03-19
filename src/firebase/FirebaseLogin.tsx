@@ -130,10 +130,11 @@ function FirebaseLogin({
             disabled={isInValid}
           />
           <PrimaryButton
-            text={<>
-            <img src={googleLogo} style={{height:"25px"}} className="float-start bg-light rounded-circle p-1"/>
+            text={<div className="d-flex align-items-center justify-content-between">
+            <img src={googleLogo} style={{height:"30px"}} className=" float-start bg-light rounded-circle p-1"/>
              {`${isNewUser ? "Register" : "Login"} with Google`}
-             </>}
+             <div></div>
+             </div>}
             action={signInWithGoogle}
           />
           {/* <div>
