@@ -1,8 +1,7 @@
 import { Card, Container } from "react-bootstrap";
-import logo from "../logo.svg";
 import logoGradient from "../logoGradient.svg";
-import fb from "../firebaseLogo.png";
 import "../App.css";
+import { FireReactBankBrand } from "./FireReactBankBrand";
 
 export function Home() {
   return (
@@ -14,19 +13,8 @@ export function Home() {
         {/* <img src={logoGradient} className="App-logo opacity-75" alt="logo" /> */}
         <div className="d-flex align-self-center">
           <h2 className="text-muted">Welcome to:</h2>
-          </div>
-        <div className="d-flex align-self-center">
-          <h1 className="text-primary align-self-center text-warning ps-2">
-            f
-            <img src={fb} style={{ height: "30px" }} />
-            <u>re</u>
-          </h1>
-          <h1 className="text-primary align-self-center">
-            <img src={logo} style={{ height: "45px", margin: "-12px" }} />
-            ct
-          </h1>
-          <h1 className="text-light align-self-center">Bank</h1>
         </div>
+        <FireReactBankBrand/>
         <p>
           <small>
             fi<u>re</u>actBank is powered by React and Firebase Firestore
@@ -36,3 +24,5 @@ export function Home() {
     </Container>
   );
 }
+
+

@@ -1,4 +1,4 @@
-function PrimaryButton({text, action, disabled = false, testid}: {text: string, action: () => void, disabled?: boolean, testid?:string}) {
+function PrimaryButton({text, action, disabled = false, testid}: {text: string | JSX.Element, action: () => void, disabled?: boolean, testid?:string}) {
   return (
     <button
       data-testid={testid ?? text}

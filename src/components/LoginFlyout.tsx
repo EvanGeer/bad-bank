@@ -3,6 +3,7 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import FirebaseLogin from "../firebase/FirebaseLogin";
 import { useFirestore } from "../firebase/useFirestore";
+import { FireReactBankBrand } from "../pages/FireReactBankBrand";
 import { FirebaseUser } from "../types/User";
 
 export default function LoginFlyout() {
@@ -57,7 +58,8 @@ export default function LoginFlyout() {
             {user?.displayName}
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className="p-0">
+          <FireReactBankBrand className="ps-2"/>
           <FirebaseLogin onLogOut={() => setUser(null)} />
         </Offcanvas.Body>
       </Offcanvas>

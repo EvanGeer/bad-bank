@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   auth,
   signInWithGoogle,
@@ -7,12 +6,9 @@ import {
   registerWithEmailAndPassword,
 } from "./auth";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { LoginCallbacks } from "../types/LoginCallbacks";
-import { db } from "./firestoreSetup";
-import { useFirestore } from "./useFirestore";
 import PrimaryButton from "../components/PrimayButton";
-import { Col, Container } from "react-bootstrap";
-import User from "../types/User";
+import { Container } from "react-bootstrap";
+import googleLogo from "../googleLogo.webp"
 
 function FirebaseLogin({
   newUser = false,
@@ -23,11 +19,14 @@ function FirebaseLogin({
   // onLogIn: (use: User) => void | undefined;
   onLogOut: undefined | (() => void);
 }) {
-  const [email, setEmail] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
   const [isNewUser, setIsNewUser] = useState(newUser);
+
+  const [isInValid, setIsInValid] = useState(true);
+  const [validationMessage, setValidationMessage] = useState("");
 
   //   const navigate = useNavigate();
   useEffect(() => {
@@ -54,6 +53,40 @@ function FirebaseLogin({
 
   const toggleRegister = () => {
     setIsNewUser(!isNewUser);
+  };
+
+  // validation
+  useEffect(() => {
+    const newValidationMessage =
+      !userName && isNewUser
+        ? "A valid name is required"
+        : !email.match(".+@.+..+")
+        ? "A valid email is required"
+        : password.length < 8
+        ? "Password must be at least 8 characters"
+        : "";
+
+    setValidationMessage(newValidationMessage);
+    setIsInValid(newValidationMessage !== "");
+  }, [userName, email, password, isNewUser]);
+
+  const submitOnEnterKey = (e: any) => {
+    // console.log(e);
+    if (e.which !== 13) return;
+    console.log("enter key");
+    handleSubmit();
+  };
+
+  const handleSubmit = () => {
+    if (isInValid) return;
+
+    isNewUser
+      ? registerWithEmailAndPassword(userName, email, password)
+      : logInWithEmailAndPassword(email, password);
+
+    setEmail("");
+    setPassword("");
+    setUserName("");
   };
 
   return (
@@ -86,22 +119,23 @@ function FirebaseLogin({
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
+            onKeyDown={submitOnEnterKey}
           />
-
-          {isNewUser ? (
-            <PrimaryButton
-              text="Register"
-              action={() =>
-                registerWithEmailAndPassword(userName, email, password)
-              }
-            />
-          ) : (
-            <PrimaryButton
-              text="Login"
-              action={() => logInWithEmailAndPassword(email, password)}
-            />
-          )}
-          <PrimaryButton text="Login with Google" action={signInWithGoogle} />
+          <small className="ms-2 text-warning">
+            {isInValid ? validationMessage : ""}
+          </small>
+          <PrimaryButton
+            text={isNewUser ? "Register" : "Login"}
+            action={handleSubmit}
+            disabled={isInValid}
+          />
+          <PrimaryButton
+            text={<>
+            <img src={googleLogo} style={{height:"25px"}} className="float-start bg-light rounded-circle p-1"/>
+             {`${isNewUser ? "Register" : "Login"} with Google`}
+             </>}
+            action={signInWithGoogle}
+          />
           {/* <div>
           <Link to="/reset">Forgot Password</Link>
         </div> */}
