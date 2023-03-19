@@ -5,7 +5,7 @@ import currencyFormat from "../modules/currencyFormat";
 import Transaction from "../types/Transaction";
 import TransactionType from "../types/TransactionType";
 
-const toastDuration = 1000;
+const toastDuration = 1500;
 
 export default function TransactionToast() {
   const [newTransactions, setNewTransactions] = useState<Transaction[]>([]);
@@ -26,7 +26,7 @@ export default function TransactionToast() {
   }, [account.ledger]);
 
   return (
-    <ToastContainer position="top-end" className="mt-4 pt-5 opacity-75">
+    <ToastContainer position="top-end" className="mt-4 pt-5 opacity-100">
       {newTransactions.map((x) => {
         return <TransToast transaction={x} />;
       })}
@@ -46,7 +46,7 @@ function TransToast({ transaction }: { transaction: Transaction }) {
       autohide={true}
       onClose={() => setShow(false)}
     >
-      <Toast.Header className="bg-secondary text-light bg-opacity-25">
+      <Toast.Header className="bg-success text-light bg-opacity-25">
         <strong 
                       className={
                         transaction.type === TransactionType.DEPOSIT
@@ -57,7 +57,7 @@ function TransToast({ transaction }: { transaction: Transaction }) {
           {transaction?.date.toDate().toLocaleTimeString()}
         </small>
       </Toast.Header>
-      <Toast.Body>
+      <Toast.Body className="bg-success">
         <small className="text-light">
          new balance {currencyFormat.format(transaction.newTotal)}</small>
       </Toast.Body>

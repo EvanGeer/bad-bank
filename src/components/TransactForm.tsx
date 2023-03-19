@@ -70,6 +70,7 @@ export function TransactForm({
 
     const updatedAccount = transaction(account, Number(value));
     setAccount(updatedAccount);
+    navTo("/")
   };
 
   const navTo = useNavigate();
