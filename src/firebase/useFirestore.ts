@@ -3,6 +3,7 @@ import {
   DocumentData,
   DocumentReference,
   getDoc,
+  onSnapshot,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
@@ -38,10 +39,18 @@ export function useFirestore() {
       if (!docSnapshot.exists()) {
         setDoc(_doc, {
           accts: {
-            "00001001": {...defaultAccount, balance: 0},
+            "00001001": { ...defaultAccount, balance: 0 },
           },
         });
       }
+    });
+
+    onSnapshot(doc(db, "users", firebaseUser.uid), (doc) => {
+      const userData = doc.data();
+      console.log(userData);
+      let updatedSnap = userData?.accts["00001001"] as Account;
+      // console.log("Current data: ", doc.data());
+      _setAccount(updatedSnap);
     });
 
     setDocRef(_doc);
@@ -57,13 +66,12 @@ export function useFirestore() {
 
       if (!newAccount) {
         newAccount = defaultAccount;
-        const newAccts = { ...userData?.accts,
-          "00001001": newAccount
-         };
+        const newAccts = { ...userData?.accts, "00001001": newAccount };
         updateDoc(docRef, {
           accts: newAccts,
         });
       }
+
       setAccount(newAccount);
     });
   }, [docRef]);
