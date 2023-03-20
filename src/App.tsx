@@ -17,7 +17,7 @@ export function App() {
     <div className={classNames("main-wrapper", "main-wrapper-responsive")}>
       <HashRouter>
         <TopNav />
-        {user ? <SidebarNav /> : null}
+        {/* {user ? <SidebarNav /> : null} */}
         <main className="m-0 pt-4 p-0 main-container container-fluid">
           <AccountContext.Provider value={{ account, setAccount }}>
             <TransactionToast />
