@@ -70,7 +70,7 @@ export function TransactForm({
 
     const updatedAccount = transaction(account, Number(value));
     setAccount(updatedAccount);
-    navTo("/")
+    // navTo("/")
   };
 
   const navTo = useNavigate();
@@ -102,7 +102,7 @@ export function TransactForm({
         {/* Buttons */}
         <div className="d-flex flex-row flex-wrap p-2 pl-4 pr-4">
           <PrimaryButton text="Home" action={() => navTo("/")} />
-          <PrimaryButton disabled={isInValid} text={transactionType} action={handleSubmit} />
+          <PrimaryButton testid="Okay" disabled={isInValid} text={transactionType} action={handleSubmit} />
         </div>
       </Card>
     </>

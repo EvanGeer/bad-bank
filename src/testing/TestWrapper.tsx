@@ -23,7 +23,7 @@ export function TestWrapper({
   return (
     <HashRouter>
       <AccountContext.Provider value={{ account, setAccount }}>
-        <AccountInfo />
+        {/* <AccountInfo /> */}
 
         { children }
 

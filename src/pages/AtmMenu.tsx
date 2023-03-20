@@ -9,11 +9,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/auth";
 import logoGradient from "../logoGradient.svg";
 import { useFirestore } from "../firebase/useFirestore";
+import { useContext } from "react";
+import AccountContext from "../contexts/accountContext";
 
 export function AtmMenu() {
   const routeTo = useNavigate();
   const [loading] = useAuthState(auth);
-  const { account } = useFirestore();
+  const { account } = useContext(AccountContext);
 
   return (
     <>
@@ -31,7 +33,7 @@ export function AtmMenu() {
                 text={menuButtons.deposit}
                 action={() => routeTo("/deposit")}
               />
-              <QuickCashButton amount={80} data-testid="fast-cash-80" />
+              <QuickCashButton amount={80} />
             </div>
             <div className="row">
               <div

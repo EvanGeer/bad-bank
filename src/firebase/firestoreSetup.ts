@@ -15,6 +15,6 @@ export const firebaseConfig = {
 
 // Initialize Firebase
 export const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const analytics = getAnalytics(app);
+// const firebaseAnalytics = analytics.IsSupported() ? getAnalytics(app) null;
 export const db = getFirestore(app);
 

@@ -8,7 +8,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import PrimaryButton from "../components/PrimayButton";
 import { Container } from "react-bootstrap";
-import googleLogo from "../googleLogo.webp"
+import googleLogo from "../googleLogo.webp";
 
 function FirebaseLogin({
   newUser = false,
@@ -77,6 +77,12 @@ function FirebaseLogin({
     handleSubmit();
   };
 
+  const alertErrors = () => {
+    if (!isInValid) return;
+
+    alert(validationMessage);
+  };
+
   const handleSubmit = () => {
     if (isInValid) return;
 
@@ -130,11 +136,17 @@ function FirebaseLogin({
             disabled={isInValid}
           />
           <PrimaryButton
-            text={<div className="d-flex align-items-center justify-content-between">
-            <img src={googleLogo} style={{height:"30px"}} className=" float-start bg-light rounded-circle p-1"/>
-             {`${isNewUser ? "Register" : "Login"} with Google`}
-             <div></div>
-             </div>}
+            text={
+              <div className="d-flex align-items-center justify-content-between">
+                <img
+                  src={googleLogo}
+                  style={{ height: "30px" }}
+                  className=" float-start bg-light rounded-circle p-1"
+                />
+                {`${isNewUser ? "Register" : "Login"} with Google`}
+                <div></div>
+              </div>
+            }
             action={signInWithGoogle}
           />
           {/* <div>
