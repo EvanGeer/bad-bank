@@ -1,4 +1,4 @@
-export default new Intl.NumberFormat("en-IN", {
+export default new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
